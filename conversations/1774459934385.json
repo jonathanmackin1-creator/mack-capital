@@ -1,0 +1,17 @@
+{
+  "id": "1774459934385",
+  "title": "What digital products should I build to generate c",
+  "date": "2026-03-25T17:32:14.385Z",
+  "messages": [
+    {
+      "role": "user",
+      "agentId": "user",
+      "content": "What digital products should I build to generate capital?"
+    },
+    {
+      "role": "assistant",
+      "agentId": "orchestrator",
+      "content": "# ORCHESTRATOR — Capital Strategy Analysis\n\n**Query assessed:** Digital product development for capital generation\n**Relevant domain:** Digital business, monetization strategy, capital deployment\n\n---\n\n## ROUTING RATIONALE\n\nThis is a **digital product strategy question** at its core. However, given your goal is capital *generation* (implying downstream deployment), I'm also looping in **Trading** and **Real Estate** agents so they can flag what capital thresholds unlock what opportunities — ensuring your digital build targets are calibrated to a larger capital strategy, not just revenue for its own sake.\n\n---\n\n## BEFORE AGENTS RESPOND — KEY INTEL I NEED FROM YOU:\n\nTo give you precise recommendations rather than generic lists, the **Digital Agent** will need:\n\n1. **Your existing assets** — audience size, email list, social following, existing content?\n2. **Time horizon** — need capital in 90 days or building for 12+ months?\n3. **Skill/IP inventory** — leadership coaching, aviation knowledge, music, military background — what are you willing to productize?\n4. **Capital target** — what number are we trying to hit and why?\n5. **Bandwidth** — are you building this yourself or do you have team support?\n\n---\n\n**Standing by for specialist agent responses.**\n\n```json\n\n```"
+    }
+  ]
+}
