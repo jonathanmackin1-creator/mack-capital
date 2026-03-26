@@ -177,7 +177,7 @@ export default function Home() {
         display: "flex", justifyContent: "space-between", alignItems: "flex-start"
       }}>
         <div>
-          <div style={{ color: "#00BFFF", fontSize: "22px", letterSpacing: "4px", marginBottom: "4px" }}>MACK CAPITAL</div>
+          <div style={{ color: "#00BFFF", fontSize: "22px", letterSpacing: "4px", marginBottom: "4px" }}>MACK ATTACK</div>
           <div style={{ color: "#666", fontSize: "13px", letterSpacing: "2px", marginBottom: "10px" }}>MULTI-AGENT INTELLIGENCE NETWORK</div>
           <div style={{ display: "flex", gap: "8px" }}>
             <button onClick={saveConversation} style={{
