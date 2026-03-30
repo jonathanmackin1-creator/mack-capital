@@ -167,7 +167,7 @@ export default function Home() {
 
   return (
     <div style={{
-      minHeight: "100vh", background: "#1e2d4a", color: "#ccc",
+      minHeight: "100vh", background: "#243558", color: "#ccc",
       fontFamily: "monospace", display: "flex", flexDirection: "column"
     }}>
       <style>{`
@@ -283,7 +283,7 @@ export default function Home() {
       <div style={{ borderTop: "1px solid #1a1a1a", padding: "20px 32px", maxWidth: "860px", width: "100%", margin: "0 auto", boxSizing: "border-box" }}>
         {/* Agent selector */}
         <div style={{ marginBottom: "12px", display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
-          <span style={{ color: "#888", fontSize: "10px", letterSpacing: "1.5px", fontFamily: "monospace" }}>FORCE AGENTS:</span>
+          <span style={{ color: "#bbb", fontSize: "10px", letterSpacing: "1.5px", fontFamily: "monospace" }}>FORCE AGENTS:</span>
           {AGENT_ORDER.map(id => {
             const agent = AGENTS[id];
             const checked = selectedAgents.includes(id);
@@ -301,7 +301,7 @@ export default function Home() {
                   background: checked ? agent.color : "transparent",
                   flexShrink: 0, transition: "all 0.2s"
                 }} />
-                <span style={{ color: checked ? agent.color : "#888", fontSize: "10px", letterSpacing: "1px", fontFamily: "monospace" }}>
+                <span style={{ color: checked ? agent.color : "#bbb", fontSize: "10px", letterSpacing: "1px", fontFamily: "monospace" }}>
                   {agent.icon} {agent.name}
                 </span>
               </label>
@@ -315,7 +315,7 @@ export default function Home() {
             }}>CLEAR</button>
           )}
           {selectedAgents.length === 0 && (
-            <span style={{ color: "#555", fontSize: "10px", fontFamily: "monospace", fontStyle: "italic" }}>auto (orchestrator decides)</span>
+            <span style={{ color: "#888", fontSize: "10px", fontFamily: "monospace", fontStyle: "italic" }}>auto (orchestrator decides)</span>
           )}
         </div>
 
@@ -351,7 +351,7 @@ export default function Home() {
             {loading ? "ROUTING..." : "DEPLOY ↑"}
           </button>
         </div>
-        <div style={{ marginTop: "8px", color: "#666", fontSize: "10px", letterSpacing: "1px" }}>
+        <div style={{ marginTop: "8px", color: "#999", fontSize: "10px", letterSpacing: "1px" }}>
           SHIFT+ENTER for new line · ENTER to send
         </div>
       </div>
