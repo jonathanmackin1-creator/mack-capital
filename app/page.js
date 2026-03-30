@@ -167,7 +167,7 @@ export default function Home() {
 
   return (
     <div style={{
-      minHeight: "100vh", background: "#243558", color: "#ccc",
+      minHeight: "100vh", background: "#2c3f63", color: "#ccc",
       fontFamily: "monospace", display: "flex", flexDirection: "column"
     }}>
       <style>{`
@@ -301,8 +301,9 @@ export default function Home() {
                   background: checked ? agent.color : "transparent",
                   flexShrink: 0, transition: "all 0.2s"
                 }} />
+                <span style={{ color: agent.color, fontSize: "12px" }}>{agent.icon}</span>
                 <span style={{ color: checked ? agent.color : "#bbb", fontSize: "10px", letterSpacing: "1px", fontFamily: "monospace" }}>
-                  {agent.icon} {agent.name}
+                  {agent.name}
                 </span>
               </label>
             );
@@ -315,7 +316,7 @@ export default function Home() {
             }}>CLEAR</button>
           )}
           {selectedAgents.length === 0 && (
-            <span style={{ color: "#888", fontSize: "10px", fontFamily: "monospace", fontStyle: "italic" }}>auto (orchestrator decides)</span>
+            <span style={{ color: "#aaa", fontSize: "10px", fontFamily: "monospace", fontStyle: "italic" }}>No Selection = Orchestrator Decides</span>
           )}
         </div>
 
