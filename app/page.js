@@ -167,7 +167,7 @@ export default function Home() {
 
   return (
     <div style={{
-      minHeight: "100vh", background: "#16213e", color: "#ccc",
+      minHeight: "100vh", background: "#1e2d4a", color: "#ccc",
       fontFamily: "monospace", display: "flex", flexDirection: "column"
     }}>
       <style>{`
@@ -218,7 +218,7 @@ export default function Home() {
       <div style={{ flex: 1, overflowY: "auto", padding: "32px", maxWidth: "860px", width: "100%", margin: "0 auto" }}>
         {messages.length === 0 && (
           <div style={{ textAlign: "center", marginTop: "80px", animation: "fadeIn 0.8s ease" }}>
-            <div style={{ color: "#00BFFF", fontSize: "32px", marginBottom: "16px" }}>⬡</div>
+            <div style={{ color: "#00BFFF", fontSize: "64px", marginBottom: "16px" }}>⬡</div>
             <div style={{ color: "#aaa", fontSize: "14px", letterSpacing: "3px", marginBottom: "32px" }}>NETWORK ONLINE</div>
             <div style={{ color: "#ddd", fontSize: "15px", lineHeight: "2", maxWidth: "480px", margin: "0 auto" }}>
               Ask anything about apps, futures trading, or real estate. The Orchestrator routes your query to the right specialists.
