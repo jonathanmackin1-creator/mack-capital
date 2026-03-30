@@ -79,7 +79,14 @@ export default function Home() {
   const [doneAgents, setDoneAgents] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
   const [history, setHistory] = useState([]);
+  const [selectedAgents, setSelectedAgents] = useState([]);
   const bottomRef = useRef(null);
+
+  function toggleAgent(id) {
+    setSelectedAgents(prev =>
+      prev.includes(id) ? prev.filter(a => a !== id) : [...prev, id]
+    );
+  }
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -128,7 +135,9 @@ export default function Home() {
     setDoneAgents(["orchestrator"]);
     setActiveAgents([]);
 
-    const relevantAgents = route.filter(id => AGENT_ORDER.includes(id));
+    const relevantAgents = selectedAgents.length > 0
+      ? selectedAgents.filter(id => AGENT_ORDER.includes(id))
+      : route.filter(id => AGENT_ORDER.includes(id));
     setActiveAgents(relevantAgents);
 
     const specialistResults = await Promise.all(
@@ -178,7 +187,7 @@ export default function Home() {
       }}>
         <div>
           <div style={{ color: "#00BFFF", fontSize: "22px", letterSpacing: "4px", marginBottom: "4px" }}>MACK ATTACK</div>
-          <div style={{ color: "#666", fontSize: "13px", letterSpacing: "2px", marginBottom: "10px" }}>MULTI-AGENT INTELLIGENCE NETWORK</div>
+          <div style={{ color: "#aaa", fontSize: "13px", letterSpacing: "2px", marginBottom: "10px" }}>MULTI-AGENT INTELLIGENCE NETWORK</div>
           <div style={{ display: "flex", gap: "8px" }}>
             <button onClick={saveConversation} style={{
               background: "transparent", border: "1px solid #444", color: "#aaa",
@@ -210,26 +219,9 @@ export default function Home() {
         {messages.length === 0 && (
           <div style={{ textAlign: "center", marginTop: "80px", animation: "fadeIn 0.8s ease" }}>
             <div style={{ color: "#00BFFF", fontSize: "32px", marginBottom: "16px" }}>⬡</div>
-            <div style={{ color: "#666", fontSize: "14px", letterSpacing: "3px", marginBottom: "32px" }}>NETWORK ONLINE</div>
-            <div style={{ color: "#bbb", fontSize: "15px", lineHeight: "2", maxWidth: "480px", margin: "0 auto" }}>
+            <div style={{ color: "#aaa", fontSize: "14px", letterSpacing: "3px", marginBottom: "32px" }}>NETWORK ONLINE</div>
+            <div style={{ color: "#ddd", fontSize: "15px", lineHeight: "2", maxWidth: "480px", margin: "0 auto" }}>
               Ask anything about apps, futures trading, or real estate. The Orchestrator routes your query to the right specialists.
-            </div>
-            <div style={{ marginTop: "40px", display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-              {[
-                "What digital products should I build to generate capital?",
-                "What futures trading strategies should I focus on?",
-                "How do I find and analyze my first real estate deal?"
-              ].map(s => (
-                <button key={s} onClick={() => setInput(s)} style={{
-                  background: "transparent", border: "1px solid #333", color: "#bbb",
-                  padding: "8px 14px", fontSize: "13px", cursor: "pointer",
-                  borderRadius: "2px", fontFamily: "monospace",
-                  transition: "all 0.2s"
-                }}
-                onMouseEnter={e => { e.target.style.borderColor = "#00BFFF"; e.target.style.color = "#00BFFF"; }}
-                onMouseLeave={e => { e.target.style.borderColor = "#333"; e.target.style.color = "#bbb"; }}
-                >{s}</button>
-              ))}
             </div>
           </div>
         )}
@@ -242,7 +234,7 @@ export default function Home() {
 
         {loading && activeAgents.length > 0 && (
           <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "16px" }}>
-            <span style={{ color: "#555", fontSize: "11px", letterSpacing: "1px" }}>ROUTING TO</span>
+            <span style={{ color: "#aaa", fontSize: "11px", letterSpacing: "1px" }}>ROUTING TO</span>
             {activeAgents.map(id => (
               <span key={id} style={{ color: AGENTS[id]?.color, fontSize: "11px", letterSpacing: "1px" }}>
                 {AGENTS[id]?.name}
@@ -289,6 +281,44 @@ export default function Home() {
 
       {/* Input */}
       <div style={{ borderTop: "1px solid #1a1a1a", padding: "20px 32px", maxWidth: "860px", width: "100%", margin: "0 auto", boxSizing: "border-box" }}>
+        {/* Agent selector */}
+        <div style={{ marginBottom: "12px", display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
+          <span style={{ color: "#888", fontSize: "10px", letterSpacing: "1.5px", fontFamily: "monospace" }}>FORCE AGENTS:</span>
+          {AGENT_ORDER.map(id => {
+            const agent = AGENTS[id];
+            const checked = selectedAgents.includes(id);
+            return (
+              <label key={id} onClick={() => toggleAgent(id)} style={{
+                display: "flex", alignItems: "center", gap: "5px",
+                cursor: "pointer", padding: "3px 10px", borderRadius: "2px",
+                border: `1px solid ${checked ? agent.color : "#333"}`,
+                background: checked ? `${agent.color}18` : "transparent",
+                transition: "all 0.2s"
+              }}>
+                <span style={{
+                  width: "10px", height: "10px", borderRadius: "2px", display: "inline-block",
+                  border: `1px solid ${checked ? agent.color : "#555"}`,
+                  background: checked ? agent.color : "transparent",
+                  flexShrink: 0, transition: "all 0.2s"
+                }} />
+                <span style={{ color: checked ? agent.color : "#888", fontSize: "10px", letterSpacing: "1px", fontFamily: "monospace" }}>
+                  {agent.icon} {agent.name}
+                </span>
+              </label>
+            );
+          })}
+          {selectedAgents.length > 0 && (
+            <button onClick={() => setSelectedAgents([])} style={{
+              background: "transparent", border: "1px solid #444", color: "#888",
+              padding: "3px 8px", fontSize: "10px", letterSpacing: "1px",
+              cursor: "pointer", borderRadius: "2px", fontFamily: "monospace"
+            }}>CLEAR</button>
+          )}
+          {selectedAgents.length === 0 && (
+            <span style={{ color: "#555", fontSize: "10px", fontFamily: "monospace", fontStyle: "italic" }}>auto (orchestrator decides)</span>
+          )}
+        </div>
+
         <div style={{
           display: "flex", gap: "12px", alignItems: "flex-end",
           border: "1px solid #1e1e1e", borderRadius: "2px",
@@ -299,7 +329,7 @@ export default function Home() {
             onChange={e => setInput(e.target.value)}
             onKeyDown={handleKey}
             placeholder="Deploy a query to the network..."
-            rows={2}
+            rows={5}
             style={{
               flex: 1, background: "transparent", border: "none",
               color: "#ccc", fontSize: "15px", fontFamily: "'Georgia', serif",
@@ -321,7 +351,7 @@ export default function Home() {
             {loading ? "ROUTING..." : "DEPLOY ↑"}
           </button>
         </div>
-        <div style={{ marginTop: "8px", color: "#333", fontSize: "10px", letterSpacing: "1px" }}>
+        <div style={{ marginTop: "8px", color: "#666", fontSize: "10px", letterSpacing: "1px" }}>
           SHIFT+ENTER for new line · ENTER to send
         </div>
       </div>
