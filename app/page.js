@@ -289,23 +289,31 @@ export default function Home() {
                       <feBlend in="SourceGraphic" in2="thresh" mode="multiply" />
                     </filter>
                   </defs>
-                  {/* Hexagon — flat top, thick white stroke, filled transparent, worn texture */}
+                  {/* Outer hexagon — white, thickest lines */}
                   <polygon
-                    points="100,12 180,56 180,144 100,188 20,144 20,56"
+                    points="100,8 182,54 182,146 100,192 18,146 18,54"
                     fill="none"
                     stroke="white"
-                    strokeWidth="10"
+                    strokeWidth="9"
                     strokeLinejoin="round"
                     filter="url(#hexWorn)"
                   />
-                  {/* Inner hexagon ring for depth */}
+                  {/* Middle hexagon — orange, medium lines */}
                   <polygon
-                    points="100,28 166,66 166,134 100,172 34,134 34,66"
+                    points="100,34 158,68 158,132 100,166 42,132 42,68"
                     fill="none"
-                    stroke="white"
-                    strokeWidth="3"
+                    stroke="#E8762A"
+                    strokeWidth="5"
                     strokeLinejoin="round"
-                    strokeOpacity="0.4"
+                    filter="url(#hexWorn)"
+                  />
+                  {/* Inner hexagon — magenta, thinnest lines */}
+                  <polygon
+                    points="100,58 138,80 138,120 100,142 62,120 62,80"
+                    fill="none"
+                    stroke="#CC3A7A"
+                    strokeWidth="2.5"
+                    strokeLinejoin="round"
                     filter="url(#hexWorn)"
                   />
                 </svg>
