@@ -71,6 +71,22 @@ async function callAgent(agentId, userMessage) {
   return data.content?.[0]?.text || "No response.";
 }
 
+function RacingStripes() {
+  const colors = ["#E8C44A", "#E8762A", "#CC3D2A", "#CC3A7A", "#A0286E"];
+  return (
+    <div style={{ width: "100%", lineHeight: 0 }}>
+      {colors.map((color, i) => (
+        <div key={i}>
+          <div style={{ height: "10px", background: color, width: "100%" }} />
+          {i < colors.length - 1 && (
+            <div style={{ height: "2px", background: "white", width: "100%", opacity: 0.9 }} />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function Home() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -184,54 +200,6 @@ export default function Home() {
       minHeight: "100vh", background: "#2B4590", color: "#dde8f8",
       fontFamily: "monospace", display: "flex", flexDirection: "column"
     }}>
-      {/* Horizontal racing stripes with cracked texture */}
-      <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 0, pointerEvents: "none" }}>
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style={{ position: "absolute", top: 0, left: 0 }}>
-          <defs>
-            <filter id="crackTexture">
-              <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" stitchTiles="stitch" result="noise"/>
-              <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
-              <feComponentTransfer in="grayNoise" result="threshold">
-                <feFuncR type="discrete" tableValues="0 0 0 1"/>
-                <feFuncG type="discrete" tableValues="0 0 0 1"/>
-                <feFuncB type="discrete" tableValues="0 0 0 1"/>
-              </feComponentTransfer>
-              <feBlend in="SourceGraphic" in2="threshold" mode="multiply" result="cracked"/>
-              <feComposite in="cracked" in2="SourceGraphic" operator="in"/>
-            </filter>
-            <filter id="crackTexture2">
-              <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="5" stitchTiles="stitch" result="noise"/>
-              <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
-              <feComponentTransfer in="grayNoise" result="threshold">
-                <feFuncR type="discrete" tableValues="0 0 1"/>
-                <feFuncG type="discrete" tableValues="0 0 1"/>
-                <feFuncB type="discrete" tableValues="0 0 1"/>
-              </feComponentTransfer>
-              <feBlend in="SourceGraphic" in2="threshold" mode="multiply"/>
-            </filter>
-          </defs>
-          {/* Stripe 1 - Yellow */}
-          <rect x="0" y="0" width="100%" height="19%" fill="#E8C44A" filter="url(#crackTexture)"/>
-          {/* White divider */}
-          <rect x="0" y="19%" width="100%" height="1.5" fill="white" opacity="0.9"/>
-          {/* Stripe 2 - Orange */}
-          <rect x="0" y="20%" width="100%" height="19%" fill="#E8762A" filter="url(#crackTexture2)"/>
-          {/* White divider */}
-          <rect x="0" y="39%" width="100%" height="1.5" fill="white" opacity="0.9"/>
-          {/* Stripe 3 - Red */}
-          <rect x="0" y="40%" width="100%" height="19%" fill="#CC3D2A" filter="url(#crackTexture)"/>
-          {/* White divider */}
-          <rect x="0" y="59%" width="100%" height="1.5" fill="white" opacity="0.9"/>
-          {/* Stripe 4 - Magenta */}
-          <rect x="0" y="60%" width="100%" height="19%" fill="#CC3A7A" filter="url(#crackTexture2)"/>
-          {/* White divider */}
-          <rect x="0" y="79%" width="100%" height="1.5" fill="white" opacity="0.9"/>
-          {/* Stripe 5 - Deep Pink */}
-          <rect x="0" y="80%" width="100%" height="20%" fill="#A0286E" filter="url(#crackTexture)"/>
-          {/* Overall dark overlay to keep readability */}
-          <rect x="0" y="0" width="100%" height="100%" fill="#2B4590" opacity="0.82"/>
-        </svg>
-      </div>
       <style>{`
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
         @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
@@ -282,11 +250,15 @@ export default function Home() {
       <div style={{ flex: 1, overflowY: "auto", padding: "32px", maxWidth: "900px", width: "100%", margin: "0 auto", position: "relative", zIndex: 10 }}>
         {messages.length === 0 && (
           <div style={{ textAlign: "center", marginTop: "80px", animation: "fadeIn 0.8s ease" }}>
-            <div style={{ color: "#E8762A", fontSize: "64px", marginBottom: "16px" }}>⬡</div>
-            <div style={{ color: "#E8C44A", fontSize: "17px", letterSpacing: "3px", marginBottom: "32px" }}>NETWORK ONLINE</div>
-            <div style={{ color: "#c8d8f0", fontSize: "17px", lineHeight: "2", maxWidth: "520px", margin: "0 auto" }}>
-              Ask anything about apps, futures trading, or real estate. The Orchestrator routes your query to the right specialists.
+            <RacingStripes />
+            <div style={{ padding: "32px 0 24px" }}>
+              <div style={{ color: "#E8762A", fontSize: "64px", marginBottom: "16px" }}>⬡</div>
+              <div style={{ color: "#E8C44A", fontSize: "17px", letterSpacing: "3px", marginBottom: "32px" }}>NETWORK ONLINE</div>
+              <div style={{ color: "#c8d8f0", fontSize: "17px", lineHeight: "2", maxWidth: "520px", margin: "0 auto" }}>
+                Ask anything about apps, futures trading, or real estate. The Orchestrator routes your query to the right specialists.
+              </div>
             </div>
+            <RacingStripes />
           </div>
         )}
 
