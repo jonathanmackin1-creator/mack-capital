@@ -275,49 +275,6 @@ export default function Home() {
         {messages.length === 0 && (
           <div style={{ textAlign: "center", marginTop: "16px", animation: "fadeIn 0.8s ease" }}>
             <div style={{ padding: "16px 0 24px" }}>
-              <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
-                <svg viewBox="0 0 200 200" width="192" height="192" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <filter id="hexWorn" x="-10%" y="-10%" width="120%" height="120%">
-                      <feTurbulence type="fractalNoise" baseFrequency="0.38" numOctaves="6" seed="7" result="noise" />
-                      <feColorMatrix type="saturate" values="0" in="noise" result="gray" />
-                      <feComponentTransfer in="gray" result="thresh">
-                        <feFuncR type="linear" slope="3.2" intercept="-0.85" />
-                        <feFuncG type="linear" slope="3.2" intercept="-0.85" />
-                        <feFuncB type="linear" slope="3.2" intercept="-0.85" />
-                      </feComponentTransfer>
-                      <feBlend in="SourceGraphic" in2="thresh" mode="multiply" />
-                    </filter>
-                  </defs>
-                  {/* Outer hexagon — white, thickest lines */}
-                  <polygon
-                    points="100,8 182,54 182,146 100,192 18,146 18,54"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="9"
-                    strokeLinejoin="round"
-                    filter="url(#hexWorn)"
-                  />
-                  {/* Middle hexagon — orange, medium lines */}
-                  <polygon
-                    points="100,34 158,68 158,132 100,166 42,132 42,68"
-                    fill="none"
-                    stroke="#E8762A"
-                    strokeWidth="5"
-                    strokeLinejoin="round"
-                    filter="url(#hexWorn)"
-                  />
-                  {/* Inner hexagon — magenta, thinnest lines */}
-                  <polygon
-                    points="100,58 138,80 138,120 100,142 62,120 62,80"
-                    fill="none"
-                    stroke="#CC3A7A"
-                    strokeWidth="2.5"
-                    strokeLinejoin="round"
-                    filter="url(#hexWorn)"
-                  />
-                </svg>
-              </div>
               <div style={{ color: "#E8C44A", fontSize: "17px", letterSpacing: "3px", marginBottom: "32px" }}>NETWORK ONLINE</div>
               <div style={{ color: "#c8d8f0", fontSize: "17px", lineHeight: "2", maxWidth: "520px", margin: "0 auto" }}>
                 Ask anything about apps, futures trading, or real estate. The Orchestrator routes your query to the right specialists.
