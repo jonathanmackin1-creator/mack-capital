@@ -273,112 +273,41 @@ export default function Home() {
       {/* Chat area */}
       <div style={{ flex: 1, overflowY: "auto", padding: "32px", maxWidth: "900px", width: "100%", margin: "0 auto", position: "relative", zIndex: 10 }}>
         {messages.length === 0 && (
-          <div style={{ textAlign: "center", marginTop: "48px", animation: "fadeIn 0.8s ease" }}>
-            <div style={{ padding: "32px 0 24px" }}>
+          <div style={{ textAlign: "center", marginTop: "16px", animation: "fadeIn 0.8s ease" }}>
+            <div style={{ padding: "16px 0 24px" }}>
               <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
                 <svg viewBox="0 0 200 200" width="192" height="192" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <filter id="patchWorn" x="-5%" y="-5%" width="110%" height="110%">
-                      <feTurbulence type="fractalNoise" baseFrequency="0.42" numOctaves="5" seed="12" result="noise" />
+                    <filter id="hexWorn" x="-10%" y="-10%" width="120%" height="120%">
+                      <feTurbulence type="fractalNoise" baseFrequency="0.38" numOctaves="6" seed="7" result="noise" />
                       <feColorMatrix type="saturate" values="0" in="noise" result="gray" />
                       <feComponentTransfer in="gray" result="thresh">
-                        <feFuncR type="linear" slope="2.8" intercept="-0.75" />
-                        <feFuncG type="linear" slope="2.8" intercept="-0.75" />
-                        <feFuncB type="linear" slope="2.8" intercept="-0.75" />
+                        <feFuncR type="linear" slope="3.2" intercept="-0.85" />
+                        <feFuncG type="linear" slope="3.2" intercept="-0.85" />
+                        <feFuncB type="linear" slope="3.2" intercept="-0.85" />
                       </feComponentTransfer>
-                      <feBlend in="SourceGraphic" in2="thresh" mode="multiply" result="blended" />
-                      <feTurbulence type="turbulence" baseFrequency="0.9" numOctaves="2" seed="3" result="grain" />
-                      <feColorMatrix type="saturate" values="0" in="grain" result="grayGrain" />
-                      <feBlend in="blended" in2="grayGrain" mode="overlay" />
+                      <feBlend in="SourceGraphic" in2="thresh" mode="multiply" />
                     </filter>
-                    <clipPath id="patchClip">
-                      <ellipse cx="100" cy="100" rx="95" ry="95" />
-                    </clipPath>
-                    <radialGradient id="spaceGrad" cx="50%" cy="40%" r="60%">
-                      <stop offset="0%" stopColor="#0a1628" />
-                      <stop offset="100%" stopColor="#020810" />
-                    </radialGradient>
-                    <radialGradient id="earthGrad" cx="40%" cy="35%" r="60%">
-                      <stop offset="0%" stopColor="#4a9eff" />
-                      <stop offset="50%" stopColor="#1a6acc" />
-                      <stop offset="100%" stopColor="#0d3d7a" />
-                    </radialGradient>
-                    <radialGradient id="moonGrad" cx="45%" cy="40%" r="55%">
-                      <stop offset="0%" stopColor="#d4c9a8" />
-                      <stop offset="100%" stopColor="#8a7d5a" />
-                    </radialGradient>
                   </defs>
-
-                  {/* Outer border ring */}
-                  <ellipse cx="100" cy="100" rx="98" ry="98" fill="#C8A84B" />
-                  <ellipse cx="100" cy="100" rx="94" ry="94" fill="#1a0a00" />
-                  <ellipse cx="100" cy="100" rx="90" ry="90" fill="#C8A84B" />
-
-                  {/* Main patch background - space */}
-                  <ellipse cx="100" cy="100" rx="86" ry="86" fill="url(#spaceGrad)" clipPath="url(#patchClip)" />
-
-                  {/* Stars */}
-                  {[[30,25],[55,18],[75,22],[90,15],[115,20],[140,28],[158,22],[170,35],[25,45],[165,50],[20,65],[172,68],[18,85],[175,90],[22,110],[170,115],[25,130],[168,135],[30,150],[162,152],[45,168],[80,175],[120,172],[150,162]].map(([x,y],i) => (
-                    <circle key={i} cx={x} cy={y} r={i%3===0?1.2:0.7} fill="white" opacity={0.6+Math.random()*0.4} />
-                  ))}
-
-                  {/* Earth - top left */}
-                  <circle cx="52" cy="48" r="28" fill="url(#earthGrad)" />
-                  {/* Earth continents suggestion */}
-                  <path d="M38 38 Q45 32 52 36 Q58 30 65 35 Q68 42 62 48 Q55 52 48 48 Q40 52 35 46 Z" fill="#2d8a3e" opacity="0.7" />
-                  <path d="M42 52 Q48 56 44 62 Q38 60 36 54 Z" fill="#2d8a3e" opacity="0.6" />
-                  <path d="M58 44 Q64 40 68 46 Q65 52 60 50 Z" fill="#2d8a3e" opacity="0.5" />
-                  {/* Earth clouds */}
-                  <path d="M30 44 Q40 38 50 42 Q45 50 32 48 Z" fill="white" opacity="0.25" />
-                  <path d="M55 34 Q65 30 72 38 Q65 44 56 40 Z" fill="white" opacity="0.2" />
-
-                  {/* Moon surface - bottom */}
-                  <ellipse cx="100" cy="155" rx="75" ry="30" fill="url(#moonGrad)" />
-                  {/* Moon craters */}
-                  <circle cx="72" cy="152" r="5" fill="none" stroke="#6a5d3a" strokeWidth="1" opacity="0.6" />
-                  <circle cx="130" cy="158" r="7" fill="none" stroke="#6a5d3a" strokeWidth="1" opacity="0.5" />
-                  <circle cx="95" cy="162" r="4" fill="none" stroke="#6a5d3a" strokeWidth="1" opacity="0.5" />
-                  <ellipse cx="110" cy="150" r="3" ry="2" fill="none" stroke="#6a5d3a" strokeWidth="0.8" opacity="0.4" />
-
-                  {/* Eagle - landing module descending */}
-                  {/* Main body */}
-                  <rect x="88" y="100" width="24" height="18" rx="2" fill="#C8A84B" />
-                  <rect x="91" y="97" width="18" height="8" rx="1" fill="#a08030" />
-                  {/* Windows */}
-                  <circle cx="96" cy="107" r="3" fill="#1a3a6a" />
-                  <circle cx="104" cy="107" r="3" fill="#1a3a6a" />
-                  {/* Landing legs */}
-                  <line x1="88" y1="115" x2="76" y2="130" stroke="#C8A84B" strokeWidth="2" />
-                  <line x1="112" y1="115" x2="124" y2="130" stroke="#C8A84B" strokeWidth="2" />
-                  <line x1="88" y1="112" x2="78" y2="120" stroke="#C8A84B" strokeWidth="1.5" />
-                  <line x1="112" y1="112" x2="122" y2="120" stroke="#C8A84B" strokeWidth="1.5" />
-                  {/* Foot pads */}
-                  <line x1="70" y1="131" x2="82" y2="131" stroke="#C8A84B" strokeWidth="2.5" />
-                  <line x1="118" y1="131" x2="130" y2="131" stroke="#C8A84B" strokeWidth="2.5" />
-                  {/* Thruster */}
-                  <path d="M96 118 L100 128 L104 118 Z" fill="#E8762A" opacity="0.8" />
-                  <path d="M98 122 L100 132 L102 122 Z" fill="#E8C44A" opacity="0.9" />
-                  {/* Solar panels */}
-                  <rect x="70" y="102" width="16" height="8" rx="1" fill="#2244aa" opacity="0.9" />
-                  <rect x="114" y="102" width="16" height="8" rx="1" fill="#2244aa" opacity="0.9" />
-                  <line x1="86" y1="106" x2="88" y2="106" stroke="#C8A84B" strokeWidth="1" />
-                  <line x1="112" y1="106" x2="114" y2="106" stroke="#C8A84B" strokeWidth="1" />
-
-                  {/* Text - APOLLO 11 around top arc */}
-                  <path id="topArc" d="M 20,100 A 80,80 0 0,1 180,100" fill="none" />
-                  <text fontSize="11" fontFamily="monospace" fontWeight="bold" fill="#C8A84B" letterSpacing="3">
-                    <textPath href="#topArc" startOffset="12%">APOLLO  11</textPath>
-                  </text>
-
-                  {/* Text - UNITED STATES around bottom */}
-                  <path id="botArc" d="M 25,115 A 80,80 0 0,0 175,115" fill="none" />
-                  <text fontSize="9" fontFamily="monospace" fontWeight="bold" fill="#C8A84B" letterSpacing="2">
-                    <textPath href="#botArc" startOffset="14%">UNITED STATES</textPath>
-                  </text>
-
-                  {/* Worn texture overlay - applied to whole patch */}
-                  <ellipse cx="100" cy="100" rx="86" ry="86" fill="transparent" filter="url(#patchWorn)" opacity="0.0" />
-                  <rect x="5" y="5" width="190" height="190" fill="url(#spaceGrad)" filter="url(#patchWorn)" opacity="0.15" clipPath="url(#patchClip)" style={{mixBlendMode:"multiply"}} />
+                  {/* Hexagon — flat top, thick white stroke, filled transparent, worn texture */}
+                  <polygon
+                    points="100,12 180,56 180,144 100,188 20,144 20,56"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="10"
+                    strokeLinejoin="round"
+                    filter="url(#hexWorn)"
+                  />
+                  {/* Inner hexagon ring for depth */}
+                  <polygon
+                    points="100,28 166,66 166,134 100,172 34,134 34,66"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="3"
+                    strokeLinejoin="round"
+                    strokeOpacity="0.4"
+                    filter="url(#hexWorn)"
+                  />
                 </svg>
               </div>
               <div style={{ color: "#E8C44A", fontSize: "17px", letterSpacing: "3px", marginBottom: "32px" }}>NETWORK ONLINE</div>
@@ -496,7 +425,7 @@ export default function Home() {
 
         <div style={{
           display: "flex", gap: "12px", alignItems: "flex-end",
-          border: "1px solid #3a5aaa", borderRadius: "2px",
+          border: "1px solid #3a5aaa", borderRadius: "12px",
           padding: "12px 16px", background: "#1e3070"
         }}>
           <textarea
