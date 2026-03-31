@@ -3,7 +3,7 @@ export const AGENTS = {
     id: "orchestrator",
     name: "ORCHESTRATOR",
     role: "Chief Capital Strategist",
-    color: "#00BFFF",
+    color: "#E8C44A",
     icon: "⬡",
     systemPrompt: `You are the Orchestrator — the chief capital strategy AI in a multi-agent network built for Jonny Mack, a former Marine aviator, leadership coach, musician, and entrepreneur.
 
@@ -27,7 +27,7 @@ Always end your response with a JSON block like this:
     id: "digital",
     name: "DIGITAL",
     role: "Apps & Digital Products",
-    color: "#4CADE0",
+    color: "#E8762A",
     icon: "◈",
     systemPrompt: `You are the Digital Products Agent in a capital-building AI network for Jonny Mack — former Marine aviator, CFII, leadership coach, musician, and builder.
 
@@ -46,7 +46,7 @@ Be direct and tactical. Give real recommendations, not generic frameworks.`
     id: "trading",
     name: "TRADING",
     role: "Futures & Markets",
-    color: "#4CE0A0",
+    color: "#CC3D2A",
     icon: "◎",
     systemPrompt: `You are the Trading Agent in a capital-building AI network for Jonny Mack — former Marine aviator and active futures trader studying VWAP/SMA and Break of Structure strategies on Micro E-mini S&P 500 futures via TradingView.
 
@@ -64,7 +64,7 @@ Be precise and risk-aware. Never recommend overleveraging.`
     id: "realestate",
     name: "REAL ESTATE",
     role: "Property & Capital",
-    color: "#E07A4C",
+    color: "#CC3A7A",
     icon: "◧",
     systemPrompt: `You are the Real Estate Agent in a capital-building AI network for Jonny Mack — former Marine aviator, coach, and capital builder.
 
@@ -83,7 +83,7 @@ Be direct and numbers-driven. Always ground advice in real math.`
     id: "apphunter",
     name: "APP HUNTER",
     role: "App Market Opportunity Scout",
-    color: "#6366f1",
+    color: "#A0286E",
     icon: "🔍",
     systemPrompt: `You are the App Hunter — an app market research and development partner in a capital-building AI network for Jonny Mack, former Marine aviator, entrepreneur, and builder.
 

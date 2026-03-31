@@ -8,13 +8,13 @@ function AgentBadge({ agent, active, done }) {
     <div style={{
       display: "flex", alignItems: "center", gap: "6px",
       padding: "6px 12px", borderRadius: "2px",
-      border: `1px solid ${active || done ? agent.color : "#444"}`,
-      background: active ? `${agent.color}18` : "transparent",
+      border: `1px solid ${active || done ? agent.color : "#4a6ab0"}`,
+      background: active ? `${agent.color}22` : "transparent",
       transition: "all 0.3s",
       opacity: done ? 0.6 : 1
     }}>
       <span style={{ color: agent.color, fontSize: "15px" }}>{agent.icon}</span>
-      <span style={{ color: active || done ? agent.color : "#999", fontSize: "13px", letterSpacing: "1.5px", fontFamily: "monospace" }}>
+      <span style={{ color: active || done ? agent.color : "#a0b4d0", fontSize: "13px", letterSpacing: "1.5px", fontFamily: "monospace" }}>
         {agent.name}
       </span>
       {active && <span style={{ color: agent.color, fontSize: "13px", animation: "pulse 1s infinite" }}>●</span>}
@@ -29,23 +29,23 @@ function MessageBlock({ msg }) {
   return (
     <div style={{
       marginBottom: "24px",
-      borderLeft: isUser ? "none" : `2px solid ${agent?.color || "#00BFFF"}`,
+      borderLeft: isUser ? "none" : `2px solid ${agent?.color || "#E8C44A"}`,
       paddingLeft: isUser ? "0" : "16px",
     }}>
       {!isUser && (
         <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
           <span style={{ color: agent?.color, fontSize: "22px" }}>{agent?.icon}</span>
           <span style={{ color: agent?.color, fontSize: "16px", letterSpacing: "2px", fontFamily: "monospace" }}>{agent?.name}</span>
-          <span style={{ color: "#999", fontSize: "14px", fontFamily: "monospace" }}>— {agent?.role}</span>
+          <span style={{ color: "#a0b4d0", fontSize: "14px", fontFamily: "monospace" }}>— {agent?.role}</span>
         </div>
       )}
       {isUser && (
         <div style={{ marginBottom: "6px" }}>
-          <span style={{ color: "#999", fontSize: "13px", letterSpacing: "2px", fontFamily: "monospace" }}>YOU</span>
+          <span style={{ color: "#a0b4d0", fontSize: "13px", letterSpacing: "2px", fontFamily: "monospace" }}>YOU</span>
         </div>
       )}
       <div style={{
-        color: isUser ? "#bbb" : "#ccc",
+        color: isUser ? "#c8d8f0" : "#dde8f8",
         fontSize: "18px",
         lineHeight: "1.8",
         fontFamily: "'Georgia', serif",
@@ -181,7 +181,7 @@ export default function Home() {
 
   return (
     <div style={{
-      minHeight: "100vh", background: "#344a70", color: "#ccc",
+      minHeight: "100vh", background: "#2B4590", color: "#dde8f8",
       fontFamily: "monospace", display: "flex", flexDirection: "column"
     }}>
       <style>{`
@@ -189,35 +189,37 @@ export default function Home() {
         @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
         textarea:focus { outline: none; }
         textarea { resize: none; }
+        textarea::placeholder { color: #6a84b8; }
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #111; }
-        ::-webkit-scrollbar-thumb { background: #333; }
+        ::-webkit-scrollbar-track { background: #1e3070; }
+        ::-webkit-scrollbar-thumb { background: #4a6ab0; }
       `}</style>
 
       {/* Header */}
       <div style={{
-        borderBottom: "1px solid #1e1e1e", padding: "20px 32px",
-        display: "flex", justifyContent: "space-between", alignItems: "flex-start"
+        borderBottom: "1px solid #3a5aaa", padding: "20px 32px",
+        display: "flex", justifyContent: "space-between", alignItems: "flex-start",
+        background: "#243d82"
       }}>
         <div>
-          <div style={{ color: "#00BFFF", fontSize: "28px", letterSpacing: "4px", marginBottom: "4px" }}>MACK ATTACK</div>
-          <div style={{ color: "#aaa", fontSize: "15px", letterSpacing: "2px", marginBottom: "10px" }}>MULTI-AGENT INTELLIGENCE NETWORK</div>
+          <div style={{ color: "#E8762A", fontSize: "28px", letterSpacing: "4px", marginBottom: "4px", fontWeight: "bold" }}>MACK ATTACK</div>
+          <div style={{ color: "#E8C44A", fontSize: "15px", letterSpacing: "2px", marginBottom: "10px" }}>MULTI-AGENT INTELLIGENCE NETWORK</div>
           <div style={{ display: "flex", gap: "8px" }}>
             <button onClick={saveConversation} style={{
-              background: "transparent", border: "1px solid #444", color: "#aaa",
+              background: "transparent", border: "1px solid #4a6ab0", color: "#a0b4d0",
               padding: "5px 14px", fontSize: "12px", letterSpacing: "1.5px",
               cursor: "pointer", borderRadius: "2px", fontFamily: "monospace", transition: "all 0.2s"
             }}
-            onMouseEnter={e => { e.target.style.borderColor = "#00BFFF"; e.target.style.color = "#00BFFF"; }}
-            onMouseLeave={e => { e.target.style.borderColor = "#444"; e.target.style.color = "#aaa"; }}
+            onMouseEnter={e => { e.target.style.borderColor = "#E8C44A"; e.target.style.color = "#E8C44A"; }}
+            onMouseLeave={e => { e.target.style.borderColor = "#4a6ab0"; e.target.style.color = "#a0b4d0"; }}
             >SAVE</button>
             <button onClick={loadHistory} style={{
-              background: "transparent", border: "1px solid #444", color: "#aaa",
+              background: "transparent", border: "1px solid #4a6ab0", color: "#a0b4d0",
               padding: "5px 14px", fontSize: "12px", letterSpacing: "1.5px",
               cursor: "pointer", borderRadius: "2px", fontFamily: "monospace", transition: "all 0.2s"
             }}
-            onMouseEnter={e => { e.target.style.borderColor = "#00BFFF"; e.target.style.color = "#00BFFF"; }}
-            onMouseLeave={e => { e.target.style.borderColor = "#444"; e.target.style.color = "#aaa"; }}
+            onMouseEnter={e => { e.target.style.borderColor = "#E8C44A"; e.target.style.color = "#E8C44A"; }}
+            onMouseLeave={e => { e.target.style.borderColor = "#4a6ab0"; e.target.style.color = "#a0b4d0"; }}
             >HISTORY</button>
           </div>
         </div>
@@ -232,9 +234,9 @@ export default function Home() {
       <div style={{ flex: 1, overflowY: "auto", padding: "32px", maxWidth: "900px", width: "100%", margin: "0 auto" }}>
         {messages.length === 0 && (
           <div style={{ textAlign: "center", marginTop: "80px", animation: "fadeIn 0.8s ease" }}>
-            <div style={{ color: "#00BFFF", fontSize: "64px", marginBottom: "16px" }}>⬡</div>
-            <div style={{ color: "#aaa", fontSize: "17px", letterSpacing: "3px", marginBottom: "32px" }}>NETWORK ONLINE</div>
-            <div style={{ color: "#ddd", fontSize: "17px", lineHeight: "2", maxWidth: "520px", margin: "0 auto" }}>
+            <div style={{ color: "#E8762A", fontSize: "64px", marginBottom: "16px" }}>⬡</div>
+            <div style={{ color: "#E8C44A", fontSize: "17px", letterSpacing: "3px", marginBottom: "32px" }}>NETWORK ONLINE</div>
+            <div style={{ color: "#c8d8f0", fontSize: "17px", lineHeight: "2", maxWidth: "520px", margin: "0 auto" }}>
               Ask anything about apps, futures trading, or real estate. The Orchestrator routes your query to the right specialists.
             </div>
           </div>
@@ -248,13 +250,13 @@ export default function Home() {
 
         {loading && activeAgents.length > 0 && (
           <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "16px" }}>
-            <span style={{ color: "#aaa", fontSize: "13px", letterSpacing: "1px" }}>ROUTING TO</span>
+            <span style={{ color: "#a0b4d0", fontSize: "13px", letterSpacing: "1px" }}>ROUTING TO</span>
             {activeAgents.map(id => (
               <span key={id} style={{ color: AGENTS[id]?.color, fontSize: "13px", letterSpacing: "1px" }}>
                 {AGENTS[id]?.name}
               </span>
             ))}
-            <span style={{ color: "#00BFFF", animation: "pulse 1s infinite" }}>●●●</span>
+            <span style={{ color: "#E8C44A", animation: "pulse 1s infinite" }}>●●●</span>
           </div>
         )}
         <div ref={bottomRef} />
@@ -264,39 +266,39 @@ export default function Home() {
       {showHistory && (
         <div style={{
           position: "fixed", top: 0, right: 0, bottom: 0, width: "340px",
-          background: "#0d0d1a", borderLeft: "1px solid #222",
+          background: "#1e3070", borderLeft: "1px solid #3a5aaa",
           padding: "24px", overflowY: "auto", zIndex: 100
         }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
-            <span style={{ color: "#00BFFF", fontSize: "14px", letterSpacing: "2px" }}>HISTORY</span>
+            <span style={{ color: "#E8C44A", fontSize: "14px", letterSpacing: "2px" }}>HISTORY</span>
             <button onClick={() => setShowHistory(false)} style={{
-              background: "transparent", border: "none", color: "#666",
+              background: "transparent", border: "none", color: "#6a84b8",
               fontSize: "22px", cursor: "pointer"
             }}>×</button>
           </div>
           {history.length === 0 ? (
-            <div style={{ color: "#666", fontSize: "14px" }}>No saved conversations.</div>
+            <div style={{ color: "#6a84b8", fontSize: "14px" }}>No saved conversations.</div>
           ) : (
             history.map(c => (
               <div key={c.id} onClick={() => loadConversation(c.id)} style={{
-                padding: "12px", marginBottom: "8px", border: "1px solid #222",
+                padding: "12px", marginBottom: "8px", border: "1px solid #3a5aaa",
                 borderRadius: "2px", cursor: "pointer", transition: "all 0.2s",
                 display: "flex", justifyContent: "space-between", alignItems: "flex-start"
               }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = "#00BFFF"}
-              onMouseLeave={e => e.currentTarget.style.borderColor = "#222"}
+              onMouseEnter={e => e.currentTarget.style.borderColor = "#E8C44A"}
+              onMouseLeave={e => e.currentTarget.style.borderColor = "#3a5aaa"}
               >
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ color: "#bbb", fontSize: "14px", marginBottom: "4px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.title}</div>
-                  <div style={{ color: "#666", fontSize: "12px" }}>{new Date(c.date).toLocaleDateString()}</div>
+                  <div style={{ color: "#c8d8f0", fontSize: "14px", marginBottom: "4px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.title}</div>
+                  <div style={{ color: "#6a84b8", fontSize: "12px" }}>{new Date(c.date).toLocaleDateString()}</div>
                 </div>
                 <button onClick={(e) => deleteConversation(e, c.id)} style={{
-                  background: "transparent", border: "none", color: "#555",
+                  background: "transparent", border: "none", color: "#6a84b8",
                   fontSize: "16px", cursor: "pointer", padding: "0 0 0 8px",
                   lineHeight: 1, flexShrink: 0, transition: "color 0.2s"
                 }}
-                onMouseEnter={e => e.target.style.color = "#ff4444"}
-                onMouseLeave={e => e.target.style.color = "#555"}
+                onMouseEnter={e => e.target.style.color = "#CC3D2A"}
+                onMouseLeave={e => e.target.style.color = "#6a84b8"}
                 title="Delete">✕</button>
               </div>
             ))
@@ -305,10 +307,10 @@ export default function Home() {
       )}
 
       {/* Input */}
-      <div style={{ borderTop: "1px solid #1a1a1a", padding: "20px 32px", maxWidth: "900px", width: "100%", margin: "0 auto", boxSizing: "border-box" }}>
+      <div style={{ borderTop: "1px solid #3a5aaa", padding: "20px 32px", maxWidth: "900px", width: "100%", margin: "0 auto", boxSizing: "border-box" }}>
         {/* Agent selector */}
         <div style={{ marginBottom: "12px", display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
-          <span style={{ color: "#bbb", fontSize: "13px", letterSpacing: "1.5px", fontFamily: "monospace" }}>FORCE AGENTS:</span>
+          <span style={{ color: "#c8d8f0", fontSize: "13px", letterSpacing: "1.5px", fontFamily: "monospace" }}>FORCE AGENTS:</span>
           {AGENT_ORDER.map(id => {
             const agent = AGENTS[id];
             const checked = selectedAgents.includes(id);
@@ -316,18 +318,18 @@ export default function Home() {
               <label key={id} onClick={() => toggleAgent(id)} style={{
                 display: "flex", alignItems: "center", gap: "6px",
                 cursor: "pointer", padding: "5px 12px", borderRadius: "2px",
-                border: `1px solid ${checked ? agent.color : "#333"}`,
-                background: checked ? `${agent.color}18` : "transparent",
+                border: `1px solid ${checked ? agent.color : "#4a6ab0"}`,
+                background: checked ? `${agent.color}22` : "transparent",
                 transition: "all 0.2s"
               }}>
                 <span style={{
                   width: "12px", height: "12px", borderRadius: "2px", display: "inline-block",
-                  border: `1px solid ${checked ? agent.color : "#555"}`,
+                  border: `1px solid ${checked ? agent.color : "#6a84b8"}`,
                   background: checked ? agent.color : "transparent",
                   flexShrink: 0, transition: "all 0.2s"
                 }} />
                 <span style={{ color: agent.color, fontSize: "15px" }}>{agent.icon}</span>
-                <span style={{ color: checked ? agent.color : "#bbb", fontSize: "13px", letterSpacing: "1px", fontFamily: "monospace" }}>
+                <span style={{ color: checked ? agent.color : "#c8d8f0", fontSize: "13px", letterSpacing: "1px", fontFamily: "monospace" }}>
                   {agent.name}
                 </span>
               </label>
@@ -335,20 +337,20 @@ export default function Home() {
           })}
           {selectedAgents.length > 0 && (
             <button onClick={() => setSelectedAgents([])} style={{
-              background: "transparent", border: "1px solid #444", color: "#aaa",
+              background: "transparent", border: "1px solid #4a6ab0", color: "#a0b4d0",
               padding: "5px 10px", fontSize: "12px", letterSpacing: "1px",
               cursor: "pointer", borderRadius: "2px", fontFamily: "monospace"
             }}>CLEAR</button>
           )}
           {selectedAgents.length === 0 && (
-            <span style={{ color: "#aaa", fontSize: "13px", fontFamily: "monospace", fontStyle: "italic" }}>No Selection = Orchestrator Decides</span>
+            <span style={{ color: "#a0b4d0", fontSize: "13px", fontFamily: "monospace", fontStyle: "italic" }}>No Selection = Orchestrator Decides</span>
           )}
         </div>
 
         <div style={{
           display: "flex", gap: "12px", alignItems: "flex-end",
-          border: "1px solid #1e1e1e", borderRadius: "2px",
-          padding: "12px 16px", background: "#0d0d1a"
+          border: "1px solid #3a5aaa", borderRadius: "2px",
+          padding: "12px 16px", background: "#1e3070"
         }}>
           <textarea
             value={input}
@@ -358,7 +360,7 @@ export default function Home() {
             rows={5}
             style={{
               flex: 1, background: "transparent", border: "none",
-              color: "#ccc", fontSize: "17px", fontFamily: "'Georgia', serif",
+              color: "#dde8f8", fontSize: "17px", fontFamily: "'Georgia', serif",
               lineHeight: "1.6"
             }}
           />
@@ -366,9 +368,9 @@ export default function Home() {
             onClick={handleSend}
             disabled={loading || !input.trim()}
             style={{
-              background: loading || !input.trim() ? "transparent" : "#00BFFF",
-              border: `1px solid ${loading || !input.trim() ? "#333" : "#00BFFF"}`,
-              color: loading || !input.trim() ? "#555" : "#0a0a0a",
+              background: loading || !input.trim() ? "transparent" : "#E8762A",
+              border: `1px solid ${loading || !input.trim() ? "#4a6ab0" : "#E8762A"}`,
+              color: loading || !input.trim() ? "#6a84b8" : "#fff",
               padding: "10px 20px", fontSize: "13px", letterSpacing: "2px",
               cursor: loading || !input.trim() ? "default" : "pointer",
               borderRadius: "2px", fontFamily: "monospace", transition: "all 0.2s"
@@ -377,7 +379,7 @@ export default function Home() {
             {loading ? "ROUTING..." : "DEPLOY ↑"}
           </button>
         </div>
-        <div style={{ marginTop: "8px", color: "#999", fontSize: "12px", letterSpacing: "1px" }}>
+        <div style={{ marginTop: "8px", color: "#a0b4d0", fontSize: "12px", letterSpacing: "1px" }}>
           SHIFT+ENTER for new line · ENTER to send
         </div>
       </div>
