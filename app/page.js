@@ -74,37 +74,31 @@ async function callAgent(agentId, userMessage) {
 function RacingStripes() {
   const colors = ["#E8C44A", "#E8762A", "#CC3D2A", "#CC3A7A", "#A0286E"];
   return (
-    <div style={{ width: "100%", lineHeight: 0 }}>
+    <div style={{ width: "100%", lineHeight: 0, position: "relative" }}>
+      <svg width="0" height="0" style={{ position: "absolute" }}>
+        <defs>
+          <filter id="worn">
+            <feTurbulence type="fractalNoise" baseFrequency="0.45" numOctaves="5" seed="8" result="noise" />
+            <feColorMatrix type="saturate" values="0" in="noise" result="gray" />
+            <feComponentTransfer in="gray" result="thresh">
+              <feFuncR type="linear" slope="3" intercept="-0.8" />
+              <feFuncG type="linear" slope="3" intercept="-0.8" />
+              <feFuncB type="linear" slope="3" intercept="-0.8" />
+            </feComponentTransfer>
+            <feBlend in="SourceGraphic" in2="thresh" mode="multiply" />
+          </filter>
+        </defs>
+      </svg>
       {colors.map((color, i) => (
         <div key={i}>
           <div style={{
             height: "28px",
             width: "100%",
             backgroundColor: color,
-            backgroundImage: `
-              repeating-linear-gradient(
-                92deg,
-                transparent 0px, transparent 6px,
-                rgba(0,0,0,0.12) 6px, rgba(0,0,0,0.12) 7px,
-                transparent 7px, transparent 11px,
-                rgba(0,0,0,0.07) 11px, rgba(0,0,0,0.07) 12px
-              ),
-              repeating-linear-gradient(
-                180deg,
-                rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 1px,
-                transparent 1px, transparent 4px,
-                rgba(0,0,0,0.06) 4px, rgba(0,0,0,0.06) 5px,
-                transparent 5px, transparent 9px
-              ),
-              repeating-linear-gradient(
-                137deg,
-                transparent 0px, transparent 8px,
-                rgba(0,0,0,0.05) 8px, rgba(0,0,0,0.05) 9px
-              )
-            `,
+            filter: "url(#worn)",
           }} />
           {i < colors.length - 1 && (
-            <div style={{ height: "3px", background: "white", width: "100%", opacity: 0.95 }} />
+            <div style={{ height: "3px", background: "white", width: "100%", opacity: 0.95, filter: "none" }} />
           )}
         </div>
       ))}
@@ -271,11 +265,15 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Full-width racing stripes */}
+      <div style={{ width: "100%", position: "relative", zIndex: 10 }}>
+        <RacingStripes />
+      </div>
+
       {/* Chat area */}
       <div style={{ flex: 1, overflowY: "auto", padding: "32px", maxWidth: "900px", width: "100%", margin: "0 auto", position: "relative", zIndex: 10 }}>
         {messages.length === 0 && (
-          <div style={{ textAlign: "center", marginTop: "80px", animation: "fadeIn 0.8s ease" }}>
-            <RacingStripes />
+          <div style={{ textAlign: "center", marginTop: "48px", animation: "fadeIn 0.8s ease" }}>
             <div style={{ padding: "32px 0 24px" }}>
               <div style={{ color: "#E8762A", fontSize: "64px", marginBottom: "16px" }}>⬡</div>
               <div style={{ color: "#E8C44A", fontSize: "17px", letterSpacing: "3px", marginBottom: "32px" }}>NETWORK ONLINE</div>
@@ -283,7 +281,6 @@ export default function Home() {
                 Ask anything about apps, futures trading, or real estate. The Orchestrator routes your query to the right specialists.
               </div>
             </div>
-            <RacingStripes />
           </div>
         )}
 
