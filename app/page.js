@@ -184,6 +184,18 @@ export default function Home() {
       minHeight: "100vh", background: "#2B4590", color: "#dde8f8",
       fontFamily: "monospace", display: "flex", flexDirection: "column"
     }}>
+      {/* Racing stripe - left side */}
+      <div style={{
+        position: "fixed", top: 0, left: 0, bottom: 0,
+        width: "18px", zIndex: 200,
+        display: "flex", flexDirection: "column"
+      }}>
+        <div style={{ flex: 1, background: "#E8C44A" }} />
+        <div style={{ flex: 1, background: "#E8762A" }} />
+        <div style={{ flex: 1, background: "#CC3D2A" }} />
+        <div style={{ flex: 1, background: "#CC3A7A" }} />
+        <div style={{ flex: 1, background: "#A0286E" }} />
+      </div>
       <style>{`
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
         @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
@@ -197,7 +209,7 @@ export default function Home() {
 
       {/* Header */}
       <div style={{
-        borderBottom: "1px solid #3a5aaa", padding: "20px 32px",
+        borderBottom: "1px solid #3a5aaa", padding: "20px 32px 20px 50px",
         display: "flex", justifyContent: "space-between", alignItems: "flex-start",
         background: "#243d82"
       }}>
@@ -307,7 +319,7 @@ export default function Home() {
       )}
 
       {/* Input */}
-      <div style={{ borderTop: "1px solid #3a5aaa", padding: "20px 32px", maxWidth: "900px", width: "100%", margin: "0 auto", boxSizing: "border-box" }}>
+      <div style={{ borderTop: "1px solid #3a5aaa", padding: "20px 32px 20px 50px", maxWidth: "900px", width: "100%", margin: "0 auto", boxSizing: "border-box" }}>
         {/* Agent selector */}
         <div style={{ marginBottom: "12px", display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
           <span style={{ color: "#c8d8f0", fontSize: "13px", letterSpacing: "1.5px", fontFamily: "monospace" }}>FORCE AGENTS:</span>
