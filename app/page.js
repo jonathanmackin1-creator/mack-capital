@@ -92,28 +92,42 @@ export default function Home() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  async function saveConversation() {
+  function getSavedConversations() {
+    try {
+      return JSON.parse(localStorage.getItem("mack_conversations") || "[]");
+    } catch { return []; }
+  }
+
+  function saveConversation() {
     if (messages.length === 0) return;
-    await fetch("/api/conversations", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages })
-    });
+    const id = Date.now().toString();
+    const firstUserMsg = messages.find(m => m.role === "user")?.content || "Conversation";
+    const title = firstUserMsg.slice(0, 50);
+    const entry = { id, title, date: new Date().toISOString(), messages };
+    const existing = getSavedConversations();
+    existing.unshift(entry);
+    localStorage.setItem("mack_conversations", JSON.stringify(existing));
     alert("Conversation saved!");
   }
 
-  async function loadHistory() {
-    const res = await fetch("/api/conversations");
-    const data = await res.json();
-    setHistory(data.conversations || []);
+  function loadHistory() {
+    setHistory(getSavedConversations());
     setShowHistory(true);
   }
 
-  async function loadConversation(id) {
-    const res = await fetch(`/api/conversations/${id}`);
-    const data = await res.json();
-    setMessages(data.messages || []);
-    setShowHistory(false);
+  function loadConversation(id) {
+    const conv = getSavedConversations().find(c => c.id === id);
+    if (conv) {
+      setMessages(conv.messages || []);
+      setShowHistory(false);
+    }
+  }
+
+  function deleteConversation(e, id) {
+    e.stopPropagation();
+    const updated = getSavedConversations().filter(c => c.id !== id);
+    localStorage.setItem("mack_conversations", JSON.stringify(updated));
+    setHistory(updated);
   }
 
   async function handleSend() {
@@ -266,13 +280,24 @@ export default function Home() {
             history.map(c => (
               <div key={c.id} onClick={() => loadConversation(c.id)} style={{
                 padding: "12px", marginBottom: "8px", border: "1px solid #222",
-                borderRadius: "2px", cursor: "pointer", transition: "all 0.2s"
+                borderRadius: "2px", cursor: "pointer", transition: "all 0.2s",
+                display: "flex", justifyContent: "space-between", alignItems: "flex-start"
               }}
               onMouseEnter={e => e.currentTarget.style.borderColor = "#00BFFF"}
               onMouseLeave={e => e.currentTarget.style.borderColor = "#222"}
               >
-                <div style={{ color: "#bbb", fontSize: "12px", marginBottom: "4px" }}>{c.title}</div>
-                <div style={{ color: "#444", fontSize: "10px" }}>{new Date(c.date).toLocaleDateString()}</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ color: "#bbb", fontSize: "12px", marginBottom: "4px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.title}</div>
+                  <div style={{ color: "#444", fontSize: "10px" }}>{new Date(c.date).toLocaleDateString()}</div>
+                </div>
+                <button onClick={(e) => deleteConversation(e, c.id)} style={{
+                  background: "transparent", border: "none", color: "#555",
+                  fontSize: "14px", cursor: "pointer", padding: "0 0 0 8px",
+                  lineHeight: 1, flexShrink: 0, transition: "color 0.2s"
+                }}
+                onMouseEnter={e => e.target.style.color = "#ff4444"}
+                onMouseLeave={e => e.target.style.color = "#555"}
+                title="Delete">✕</button>
               </div>
             ))
           )}
