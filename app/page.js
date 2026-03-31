@@ -77,9 +77,34 @@ function RacingStripes() {
     <div style={{ width: "100%", lineHeight: 0 }}>
       {colors.map((color, i) => (
         <div key={i}>
-          <div style={{ height: "10px", background: color, width: "100%" }} />
+          <div style={{
+            height: "28px",
+            width: "100%",
+            backgroundColor: color,
+            backgroundImage: `
+              repeating-linear-gradient(
+                92deg,
+                transparent 0px, transparent 6px,
+                rgba(0,0,0,0.12) 6px, rgba(0,0,0,0.12) 7px,
+                transparent 7px, transparent 11px,
+                rgba(0,0,0,0.07) 11px, rgba(0,0,0,0.07) 12px
+              ),
+              repeating-linear-gradient(
+                180deg,
+                rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 1px,
+                transparent 1px, transparent 4px,
+                rgba(0,0,0,0.06) 4px, rgba(0,0,0,0.06) 5px,
+                transparent 5px, transparent 9px
+              ),
+              repeating-linear-gradient(
+                137deg,
+                transparent 0px, transparent 8px,
+                rgba(0,0,0,0.05) 8px, rgba(0,0,0,0.05) 9px
+              )
+            `,
+          }} />
           {i < colors.length - 1 && (
-            <div style={{ height: "2px", background: "white", width: "100%", opacity: 0.9 }} />
+            <div style={{ height: "3px", background: "white", width: "100%", opacity: 0.95 }} />
           )}
         </div>
       ))}
