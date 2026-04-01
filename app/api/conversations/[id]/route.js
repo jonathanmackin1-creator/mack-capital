@@ -15,3 +15,16 @@ export async function GET(request, { params }) {
     return Response.json({ error: error.message }, { status: 500 });
   }
 }
+
+export async function DELETE(request, { params }) {
+  try {
+    const { id } = await params;
+    await redis.del(`conv:${id}`);
+    const index = await redis.get("conv_index") || [];
+    const updated = index.filter(c => c.id !== id);
+    await redis.set("conv_index", updated);
+    return Response.json({ success: true });
+  } catch (error) {
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+}

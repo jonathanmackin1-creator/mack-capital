@@ -127,42 +127,36 @@ export default function Home() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  function getSavedConversations() {
-    try {
-      return JSON.parse(localStorage.getItem("mack_conversations") || "[]");
-    } catch { return []; }
-  }
-
-  function saveConversation() {
+  async function saveConversation() {
     if (messages.length === 0) return;
-    const id = Date.now().toString();
-    const firstUserMsg = messages.find(m => m.role === "user")?.content || "Conversation";
-    const title = firstUserMsg.slice(0, 50);
-    const entry = { id, title, date: new Date().toISOString(), messages };
-    const existing = getSavedConversations();
-    existing.unshift(entry);
-    localStorage.setItem("mack_conversations", JSON.stringify(existing));
+    await fetch("/api/conversations", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages })
+    });
     alert("Conversation saved!");
   }
 
-  function loadHistory() {
-    setHistory(getSavedConversations());
+  async function loadHistory() {
+    const res = await fetch("/api/conversations");
+    const data = await res.json();
+    setHistory(data.conversations || []);
     setShowHistory(true);
   }
 
-  function loadConversation(id) {
-    const conv = getSavedConversations().find(c => c.id === id);
-    if (conv) {
-      setMessages(conv.messages || []);
+  async function loadConversation(id) {
+    const res = await fetch(`/api/conversations/${id}`);
+    const data = await res.json();
+    if (data.messages) {
+      setMessages(data.messages);
       setShowHistory(false);
     }
   }
 
-  function deleteConversation(e, id) {
+  async function deleteConversation(e, id) {
     e.stopPropagation();
-    const updated = getSavedConversations().filter(c => c.id !== id);
-    localStorage.setItem("mack_conversations", JSON.stringify(updated));
-    setHistory(updated);
+    await fetch(`/api/conversations/${id}`, { method: "DELETE" });
+    setHistory(prev => prev.filter(c => c.id !== id));
   }
 
   async function handleSend() {
